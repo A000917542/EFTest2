@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@*<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+
+<form method="post">
+    <div>
+        <label asp-for="Blog.Name"></label>
+        <input asp-for="Blog.Name" />
+    </div>
+    <div>
+        <label asp-for="Blog.StartDate"></label>
+        <input asp-for="Blog.StartDate" />
+    </div>
+    <input type="submit" />
+</form>
+
+<section>
+    @foreach(var blog in Model.BlogList)
+            {
+    <section>
+        <h2>@blog.Name</h2>
+        <p>@blog.StartDate</p>
+    </section>
+            }
+</section>
