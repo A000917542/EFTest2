@@ -30,12 +30,15 @@ namespace EFTest2.Areas.Admin.Pages.Posts
                 return NotFound();
             }
 
-            Post = await _context.Posts.FirstOrDefaultAsync(m => m.PostId == id);
+            Post = await _context.Posts.Include(p => p.Blog).FirstOrDefaultAsync(m => m.PostId == id);
 
             if (Post == null)
             {
                 return NotFound();
             }
+
+            ViewData["BlogItems"] = new SelectList(_context.Blogs, "BlogId", "Name");
+
             return Page();
         }
 

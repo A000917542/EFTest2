@@ -37,7 +37,7 @@ namespace EFTest2.Areas.Admin.Pages.Blogs
             {
                 return NotFound();
             }
-           ViewData["PrimaryEmail"] = new SelectList(_context.Authors, "Email", "Email");
+           ViewData["PrimaryEmail"] = new SelectList(_context.Authors, "Email", "Name");
             return Page();
         }
 
