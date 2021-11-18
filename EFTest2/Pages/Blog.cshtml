@@ -1,0 +1,14 @@
+﻿@page
+@using EFTest2.Models
+@model EFTest2.Pages.BlogModel
+@{
+}
+
+<h1>@Model.Blog.Name</h1>
+
+<ul>
+    @foreach(Post post in Model.Blog.Posts)
+            {
+                <li><a asp-page="Post" asp-route-id="@post.PostId" >@post.Title</a></li>
+            }
+</ul>

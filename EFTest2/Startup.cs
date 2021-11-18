@@ -63,6 +63,8 @@ namespace EFTest2
 
                 endpoints.MapRazorPages();
             });
+
+            
         }
     }
 }

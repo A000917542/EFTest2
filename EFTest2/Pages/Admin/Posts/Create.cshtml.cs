@@ -21,6 +21,8 @@ namespace EFTest2.Areas.Admin.Pages.Posts
 
         public IActionResult OnGet()
         {
+            ViewData["BlogItems"] = new SelectList(_context.Blogs, "BlogId", "Name");
+
             return Page();
         }
 
@@ -37,6 +39,8 @@ namespace EFTest2.Areas.Admin.Pages.Posts
 
             _context.Posts.Add(Post);
             await _context.SaveChangesAsync();
+
+            ViewData["BlogItems"] = new SelectList(_context.Blogs, "BlogId", "Name");
 
             return RedirectToPage("./Index");
         }

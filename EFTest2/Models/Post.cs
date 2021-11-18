@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace EFTest2.Models
 {
@@ -15,7 +16,10 @@ namespace EFTest2.Models
 
         public bool IsPublished { get; set; } = false;
 
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
+
+        public int BlogId { get; set; }
 
         public Blog Blog { get; set; }
 
