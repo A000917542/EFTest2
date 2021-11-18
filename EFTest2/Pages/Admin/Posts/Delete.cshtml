@@ -39,7 +39,7 @@
         </dd>
     </dl>
     
-    <form method="post">
+    <form asp-page="Delete" method="post">
         <input type="hidden" asp-for="Post.PostId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Back to List</a>

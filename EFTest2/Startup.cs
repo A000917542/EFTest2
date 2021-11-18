@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace EFTest2
 {
@@ -29,6 +30,14 @@ namespace EFTest2
                 options.UseSqlServer(@"name=ConnectionStrings:BlogDB");
             });
 
+            services.AddResponseCompression(options => {
+                options.EnableForHttps = true;
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
+                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                    new[] { "text/javascript", "application/javascript", "text/css" });
+            });
+
             services.AddRazorPages();
         }
 
@@ -46,12 +55,16 @@ namespace EFTest2
                 app.UseHsts();
             }
 
+            app.UseResponseCompression();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            
 
             app.UseEndpoints(endpoints =>
             {
