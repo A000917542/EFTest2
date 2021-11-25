@@ -12,3 +12,16 @@
                 <li><a asp-page="Post" asp-route-id="@post.PostId" >@post.Title</a></li>
             }
 </ul>
+
+@section Schema
+{
+    <script type="application/ld+json">
+        {
+            "@@context": "http://schema.org",
+            "@@type": "Blog",
+            "dateCreated": "@Model.Blog.StartDate",
+            "name": "@Model.Blog.Name",
+            "url": "@HttpContext.Request.GetDisplayUrl()"
+        }
+    </script>
+}

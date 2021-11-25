@@ -69,8 +69,6 @@ namespace EFTest2
 
             app.UseAuthorization();
 
-            
-
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapAreaControllerRoute(

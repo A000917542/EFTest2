@@ -6,3 +6,22 @@
 <h1>@Model.Post.Title</h1>
 
 @Model.Post.Content
+
+
+@section Schema
+{
+    <script type="application/ld+json">
+        {
+            "@@context": "http://schema.org",
+            "@@type": "Blog",
+            "dateCreated": "@Model.Post.Blog.StartDate",
+            "name": "@Model.Post.Blog.Name",
+            "blogPost": {
+                "@@type": "BlogPosting",
+                "datePublished": "@Model.Post.PublishDate",
+                "name": "@Model.Post.Title",
+                "url": "@HttpContext.Request.GetDisplayUrl()"
+            }
+        }
+    </script>
+}

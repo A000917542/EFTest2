@@ -6,6 +6,7 @@ using EFTest2.Data;
 using EFTest2.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFTest2.Pages
 {
@@ -23,7 +24,7 @@ namespace EFTest2.Pages
 
         public void OnGet(int id)
         {
-            Post = db.Posts.FirstOrDefault(post => post.PostId == id);
+            Post = db.Posts.Include(post => post.Blog).FirstOrDefault(post => post.PostId == id);
         }
     }
 }
