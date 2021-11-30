@@ -24,7 +24,7 @@ namespace EFTest2.Pages
 
         public void OnGet(int id)
         {
-            Blog = db.Blogs.Include(blog => blog.Posts).FirstOrDefault(blog => blog.BlogId == id);
+            Blog = db.Blogs.Include(blog => blog.PrimaryAuthor).Include(blog => blog.Posts).FirstOrDefault(blog => blog.BlogId == id);
         }
     }
 }

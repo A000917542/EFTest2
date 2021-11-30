@@ -16,11 +16,38 @@
             "@@type": "Blog",
             "dateCreated": "@Model.Post.Blog.StartDate",
             "name": "@Model.Post.Blog.Name",
+            @if (Model?.Post?.Blog?.PrimaryAuthor != null)
+            {
+                @:"author": {
+                @:    "@@type": "Person",
+                @:    "name": "@Model.Post.Blog.PrimaryAuthor.Name",
+                @:    "email": "@Model.Post.Blog.PrimaryAuthor.Email",
+                @:    "birthDate": "@Model.Post.Blog.PrimaryAuthor.DateOfBirth.Date.ToString("s")"
+                @:},
+            }
             "blogPost": {
                 "@@type": "BlogPosting",
                 "datePublished": "@Model.Post.PublishDate",
                 "name": "@Model.Post.Title",
-                "url": "@HttpContext.Request.GetDisplayUrl()"
+                "url": "@HttpContext.Request.GetDisplayUrl()",
+                "author": [
+                    @*@foreach(var author in Model.Post.Authors)
+                {
+                @: {
+                @:    "@@type": "Person",
+                @:    "name": "@Model.Post.Blog.PrimaryAuthor.Name",
+                @:    "email": "@Model.Post.Blog.PrimaryAuthor.Email",
+                @:    "birthDate": "@Model.Post.Blog.PrimaryAuthor.DateOfBirth.Date.ToString("s")"
+                @:}
+                @if (Model.Post.Authors.ElementAt(@Model.Post.Authors.Count - 1) != author)
+                {
+                    @:,
+                }
+                }*@
+
+                @Html.Raw(String.Join(',', @Model?.Post?.Authors.Select(author => string.Concat("{", "\"@type\": \"Person\", \"name\": \"", author.Name, "\", \"email\": \"", author.Email, "\", \"birthDate\": \"", author.DateOfBirth, "\"}"))))
+
+                ]
             }
         }
     </script>

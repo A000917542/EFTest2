@@ -21,7 +21,17 @@
             "@@type": "Blog",
             "dateCreated": "@Model.Blog.StartDate",
             "name": "@Model.Blog.Name",
-            "url": "@HttpContext.Request.GetDisplayUrl()"
+            "url": "@HttpContext.Request.GetDisplayUrl()",
+            @if (Model?.Blog?.PrimaryAuthor != null)
+            {
+                @:"author": {
+                @:    "@@type": "Person",
+                @:    "name": "@Model.Blog.PrimaryAuthor.Name",
+                @:    "email": "@Model.Blog.PrimaryAuthor.Email",
+                @:    "birthDate": "@Model.Blog.PrimaryAuthor.DateOfBirth.Date.ToString("s")"
+                @:}
+            }
+            
         }
     </script>
 }
